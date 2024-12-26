@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, os
 from metrics_handler import *
 
 def read_ht2000_data():
@@ -30,10 +30,9 @@ def read_ht2000_data():
         return None, None
     
 if __name__ == "__main__":
-    # print(generate_metrics(read_ht2000_data()))
-    print("check if ht2000 device is connected")
+    if os.geteuid() != 0:
+        exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
     read_ht2000_data()
-    print("it's here")
     server_address = ("", 8008) 
     httpd = HTTPServer(server_address, MetricsHandler)
     print(f"Serving metrics on http://localhost:8008/metrics")
