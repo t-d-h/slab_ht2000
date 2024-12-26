@@ -21,6 +21,8 @@ def read_ht2000_data():
         )
         if 'No such file or directory' in result.stderr.strip():
             print("Cannot find ht2000 device.")
+            exit()
+            return None, None
         return result.stdout.strip(), result.stderr.strip()
     except Exception as e:
         print("Command Error:")
@@ -29,7 +31,9 @@ def read_ht2000_data():
     
 if __name__ == "__main__":
     # print(generate_metrics(read_ht2000_data()))
-    
+    print("check if ht2000 device is connected")
+    read_ht2000_data()
+    print("it's here")
     server_address = ("", 8008) 
     httpd = HTTPServer(server_address, MetricsHandler)
     print(f"Serving metrics on http://localhost:8008/metrics")
