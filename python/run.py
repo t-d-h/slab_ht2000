@@ -30,7 +30,7 @@ def read_ht2000_data():
 if __name__ == "__main__":
     # print(generate_metrics(read_ht2000_data()))
     
-    server_address = ("0.0.0.0", 8008) 
+    server_address = ("", 8008) 
     httpd = HTTPServer(server_address, MetricsHandler)
-    print(f"Serving metrics on http://{server_address}/metrics")
+    print(f"Serving metrics on http://localhost:8008/metrics")
     httpd.serve_forever()
