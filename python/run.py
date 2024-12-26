@@ -33,7 +33,7 @@ if __name__ == "__main__":
     if os.geteuid() != 0:
         exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
     read_ht2000_data()
-    server_address = ("", 8008) 
+    server_address = ("0.0.0.0", 8008) 
     httpd = HTTPServer(server_address, MetricsHandler)
     print(f"Serving metrics on http://localhost:8008/metrics")
     httpd.serve_forever()
